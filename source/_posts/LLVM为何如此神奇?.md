@@ -1,6 +1,7 @@
-# LLVM
+# LLVM (翻译）
 
 [Chris Lattner](http://www.aosabook.org/en/intro1.html#lattner-chris)
+作者：[Chris Lattner](http://www.aosabook.org/en/intro1.html#lattner-chris)
 
 This chapter discusses some of the design decisions that shaped LLVM[1](http://www.aosabook.org/en/llvm.html#footnote-1), an umbrella project that hosts and develops a set of close-knit low-level toolchain components (e.g., assemblers, compilers, debuggers, etc.), which are designed to be compatible with existing tools typically used on Unix systems. The name "LLVM" was once an acronym, but is now just a brand for the umbrella project. While LLVM provides some unique capabilities, and is known for some of its great tools (e.g., the Clang compiler[2](http://www.aosabook.org/en/llvm.html#footnote-2), a C/C++/Objective-C compiler which provides a number of benefits over the GCC compiler), the main thing that sets LLVM apart from other compilers is its internal architecture.
 
@@ -11,9 +12,11 @@ From its beginning in December 2000, LLVM was designed as a set of reusable libr
 
 自2000年12月开始，LLVM在设计时被定了良好编程接口的可重用库[[LA04](http://www.aosabook.org/en/bib1.html#bib:lattner:cgo)]。在当时，一般开源语言的实现通常都具有专门的开发工具。举个例子，对于一个静态编译器（如: GCC) 用语法分析来进行静态分析或重构非常困难。然而脚本语言通常会提供一种方式将它们的运行时和解释器嵌入到大型应用程序中，这个运行时包含或排除了单独的整个代码块。不过它们没有办法重用组件，而且在跨语言的工程上能够复用的东西少之又少。
 
-[[---------start---------]]
 Beyond the composition of the compiler itself, the communities surrounding popular language implementations were usually strongly polarized: an implementation usually provided *either* a traditional static compiler like GCC, Free Pascal, and FreeBASIC, *or* it provided a runtime compiler in the form of an interpreter or Just-In-Time (JIT) compiler. It was very uncommon to see language implementation that supported both, and if they did, there was usually very little sharing of code.
 
+除了编译器自身的组成之外，通常围绕主流语言实现的社区开发者都是很极端的：像GCC、Free Pascal和FreeBASIC的实现通常都会有传统的静态编译器，有runtime 这样注入形式的编译或者是JIT编译器。一般两种都提供的不是很常见，如果真的有的话，它们的共用部分也很少。
+
+[[---------start---------]]
 Over the last ten years, LLVM has substantially altered this landscape. LLVM is now used as a common infrastructure to implement a broad variety of statically and runtime compiled languages (e.g., the family of languages supported by GCC, Java, .NET, Python, Ruby, Scheme, Haskell, D, as well as countless lesser known languages). It has also replaced a broad variety of special purpose compilers, such as the runtime specialization engine in Apple's OpenGL stack and the image processing library in Adobe's After Effects product. Finally LLVM has also been used to create a broad variety of new products, perhaps the best known of which is the OpenCL GPU programming language and runtime.
 
 

@@ -19,6 +19,8 @@ Beyond the composition of the compiler itself, the communities surrounding popul
 [[---------start---------]]
 Over the last ten years, LLVM has substantially altered this landscape. LLVM is now used as a common infrastructure to implement a broad variety of statically and runtime compiled languages (e.g., the family of languages supported by GCC, Java, .NET, Python, Ruby, Scheme, Haskell, D, as well as countless lesser known languages). It has also replaced a broad variety of special purpose compilers, such as the runtime specialization engine in Apple's OpenGL stack and the image processing library in Adobe's After Effects product. Finally LLVM has also been used to create a broad variety of new products, perhaps the best known of which is the OpenCL GPU programming language and runtime.
 
+在过去的十年里，LLVM 对这个境况已经有了极大的突破。现在 LLVM 已经作为一个常用的基础设施
+
 
 
 

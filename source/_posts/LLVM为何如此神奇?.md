@@ -16,12 +16,9 @@ Beyond the composition of the compiler itself, the communities surrounding popul
 
 除了编译器自身的组成之外，通常围绕主流语言实现的社区开发者都是很极端的：像GCC、Free Pascal和FreeBASIC的实现通常都会有传统的静态编译器，有runtime 这样注入形式的编译或者是JIT编译器。一般两种都提供的不是很常见，如果真的有的话，它们的共用部分也很少。
 
-[[---------start---------]]
 Over the last ten years, LLVM has substantially altered this landscape. LLVM is now used as a common infrastructure to implement a broad variety of statically and runtime compiled languages (e.g., the family of languages supported by GCC, Java, .NET, Python, Ruby, Scheme, Haskell, D, as well as countless lesser known languages). It has also replaced a broad variety of special purpose compilers, such as the runtime specialization engine in Apple's OpenGL stack and the image processing library in Adobe's After Effects product. Finally LLVM has also been used to create a broad variety of new products, perhaps the best known of which is the OpenCL GPU programming language and runtime.
 
-在过去的十年里，LLVM 对这个境况已经有了极大的突破。现在 LLVM 已经作为一个常用的基础设施
-
-
+在过去的十年里，LLVM 对这个境况已经有了极大的突破。现在 LLVM 已经作为一个常用的公共基础工具，用来实现各种各样的静态和动态的编译语言(例如: GCC、Java、. net、Python、Ruby、Scheme、Haskell、D以及无数小众语言)。像苹果 OpenGL 堆栈中专门用来处理 runtime 的引擎以及 Adobe 公司用来处理图像库的产品 After Effects 和各种特殊用途的编译器都被 LLVM 所取代了。最终 LLVM 也被用来创造于各种各样的新产品,最知名的也许就是 OpenCL GPU 编程语言和 runtime 运行时了。
 
 
 
@@ -29,7 +26,9 @@ Over the last ten years, LLVM has substantially altered this landscape. LLVM is 
 
 The most popular design for a traditional static compiler (like most C compilers) is the three phase design whose major components are the front end, the optimizer and the back end ([Figure 11.1](http://www.aosabook.org/en/llvm.html#fig.llvm.com)). The front end parses source code, checking it for errors, and builds a language-specific Abstract Syntax Tree (AST) to represent the input code. The AST is optionally converted to a new representation for optimization, and the optimizer and back end are run on the code.
 
+[[---------start---------]]
 
+## 11.1. 经典编译器设计的简单介绍
 
 Figure 11.1: Three Major Components of a Three-Phase Compiler
 

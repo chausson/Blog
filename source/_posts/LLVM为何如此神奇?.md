@@ -1,4 +1,4 @@
-# LLVM (翻译）
+# LLVM (译）
 
 [Chris Lattner](http://www.aosabook.org/en/intro1.html#lattner-chris)
 作者：[Chris Lattner](http://www.aosabook.org/en/intro1.html#lattner-chris)
@@ -26,15 +26,22 @@ Over the last ten years, LLVM has substantially altered this landscape. LLVM is 
 
 The most popular design for a traditional static compiler (like most C compilers) is the three phase design whose major components are the front end, the optimizer and the back end ([Figure 11.1](http://www.aosabook.org/en/llvm.html#fig.llvm.com)). The front end parses source code, checking it for errors, and builds a language-specific Abstract Syntax Tree (AST) to represent the input code. The AST is optionally converted to a new representation for optimization, and the optimizer and back end are run on the code.
 
-[[---------start---------]]
+## 11.1. 经典编译器设计的概要
 
-## 11.1. 经典编译器设计的简单介绍
+传统静态编译器（大多数 C 编译器）比较流行的设计是三相设计，其主要的组件都是前端、优化器和后端(如图11.1)(http://www.aosabook.org/en/llvm.html#fig.llvm.com))。前端负责的职责是解析源代码，检查错误，并编译和构建特定语言的抽象语法树(AST)来生成中间代码。为了优化抽象语法树 (AST) 可以任意的转换成一种新的呈现方式,并在代码上运行优化器和后端。
+
 
 Figure 11.1: Three Major Components of a Three-Phase Compiler
 
 The optimizer is responsible for doing a broad variety of transformations to try to improve the code's running time, such as eliminating redundant computations, and is usually more or less independent of language and target. The back end (also known as the code generator) then maps the code onto the target instruction set. In addition to making *correct* code, it is responsible for generating *good*code that takes advantage of unusual features of the supported architecture. Common parts of a compiler back end include instruction selection, register allocation, and instruction scheduling.
 
 This model applies equally well to interpreters and JIT compilers. The Java Virtual Machine (JVM) is also an implementation of this model, which uses Java bytecode as the interface between the front end and optimizer.
+
+[[---------start---------]]
+
+图11.1: 三相编译器三个重要的组件
+
+
 
 ### 11.1.1. Implications of this Design
 

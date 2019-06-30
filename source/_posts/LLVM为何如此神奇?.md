@@ -48,22 +48,27 @@ This model applies equally well to interpreters and JIT compilers. The Java Virt
 
 The most important win of this classical design comes when a compiler decides to support multiple source languages or target architectures. If the compiler uses a common code representation in its optimizer, then a front end can be written for any language that can compile to it, and a back end can be written for any target that can compile from it, as shown in [Figure 11.2](http://www.aosabook.org/en/llvm.html#fig.llvm.rtc).
 
-### 11.1.1. 这个设计的意义
-
-
-
 Figure 11.2: Retargetablity
 
 With this design, porting the compiler to support a new source language (e.g., Algol or BASIC) requires implementing a new front end, but the existing optimizer and back end can be reused. If these parts weren't separated, implementing a new source language would require starting over from scratch, so supporting `N` targets and `M` source languages would need N*M compilers.
+
+[[---------start---------]]
+
 
 Another advantage of the three-phase design (which follows directly from retargetability) is that the compiler serves a broader set of programmers than it would if it only supported one source language and one target. For an open source project, this means that there is a larger community of potential contributors to draw from, which naturally leads to more enhancements and improvements to the compiler. This is the reason why open source compilers that serve many communities (like GCC) tend to generate better optimized machine code than narrower compilers like FreePASCAL. This isn't the case for proprietary compilers, whose quality is directly related to the project's budget. For example, the Intel ICC Compiler is widely known for the quality of code it generates, even though it serves a narrow audience.
 
 A final major win of the three-phase design is that the skills required to implement a front end are different than those required for the optimizer and back end. Separating these makes it easier for a "front-end person" to enhance and maintain their part of the compiler. While this is a social issue, not a technical one, it matters a lot in practice, particularly for open source projects that want to reduce the barrier to contributing as much as possible.
 
-[[---------start---------]]
+### 11.1.1. 这个设计的意义
+
+当编译器决定要支持多种语言或终端时，这种经典设计才发挥出最重要的作用。如果编译器使用了普通代码来做优化，那么它可以为任何可以编语言编写前端，也可以为任何可以从它编译的目标编写后端，如下所示: [Figure 11.2](http://www.aosabook.org/en/llvm.html#fig.llvm.rtc)。
 
 
+Figure 11.2: Retargetablity
 
+使用这种设计，虽然移植编译器需要支持一种新的语言源(例如Algol或BASIC)并且实现一套全新的前端，但是已经存在的优化器和后端都可以被重用。如果这部分没有被区分开，实现一种新的源语言需要重头开始，所以支持 `N` 和 `M` 的语言需要 N*M 编译器。
+
+三段式设计的另外一方面的好处在于相比只支持一种终端和语言的编译器，它的编译功能使用更加广泛。
 
 
 ## 11.2. Existing Language Implementations

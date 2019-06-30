@@ -28,7 +28,7 @@ The most popular design for a traditional static compiler (like most C compilers
 
 ## 11.1. 经典编译器设计的概要
 
-传统静态编译器（大多数 C 编译器）比较流行的设计是三相设计，其主要的组件都是前端、优化器和后端(如图11.1)(http://www.aosabook.org/en/llvm.html#fig.llvm.com))。前端负责的职责是解析源代码，检查错误，并编译和构建特定语言的抽象语法树(AST)来生成中间代码。为了优化抽象语法树 (AST) 可以任意的转换成一种新的呈现方式,并在代码上运行优化器和后端。
+传统静态编译器（大多数 C 编译器）比较流行的设计是三段设计，其主要的组成是前端、优化器和后端(如图11.1)(http://www.aosabook.org/en/llvm.html#fig.llvm.com))。前端负责的职责是解析源代码，检查错误，并编译和构建特定语言的抽象语法树(AST)来生成中间代码。为了优化抽象语法树 (AST) 可以任意的转换成一种新的呈现方式,并在代码上运行优化器和后端。
 
 
 Figure 11.1: Three Major Components of a Three-Phase Compiler
@@ -37,15 +37,18 @@ The optimizer is responsible for doing a broad variety of transformations to try
 
 This model applies equally well to interpreters and JIT compilers. The Java Virtual Machine (JVM) is also an implementation of this model, which uses Java bytecode as the interface between the front end and optimizer.
 
-[[---------start---------]]
 
-图11.1: 三相编译器三个重要的组件
+图11.1: 三段编译的三个主要部分
 
+优化器主要是负责执行各种各样的转换，来减少代码的运行时间,比如去除冗余的计算,并且通常都是不区分语言和其他工具的。然后后端（也是我们知道的代码生成器）会将代码映射到指令集。除了生成正确的代码，大部分生成的良好代码都是利用了所支持架构的不寻常特性。通常这一部分是编译了后端包括它的指令选择，寄存器分配，以及指令调度。
 
+这种模式也同样应用在解释器和JIT编译器。JVM 虚拟机用了 Java 字节码作为前端和优化器之间的接口，也是实现了这样的一种模式。
 
 ### 11.1.1. Implications of this Design
 
 The most important win of this classical design comes when a compiler decides to support multiple source languages or target architectures. If the compiler uses a common code representation in its optimizer, then a front end can be written for any language that can compile to it, and a back end can be written for any target that can compile from it, as shown in [Figure 11.2](http://www.aosabook.org/en/llvm.html#fig.llvm.rtc).
+
+### 11.1.1. 这个设计的意义
 
 
 
@@ -56,6 +59,12 @@ With this design, porting the compiler to support a new source language (e.g., A
 Another advantage of the three-phase design (which follows directly from retargetability) is that the compiler serves a broader set of programmers than it would if it only supported one source language and one target. For an open source project, this means that there is a larger community of potential contributors to draw from, which naturally leads to more enhancements and improvements to the compiler. This is the reason why open source compilers that serve many communities (like GCC) tend to generate better optimized machine code than narrower compilers like FreePASCAL. This isn't the case for proprietary compilers, whose quality is directly related to the project's budget. For example, the Intel ICC Compiler is widely known for the quality of code it generates, even though it serves a narrow audience.
 
 A final major win of the three-phase design is that the skills required to implement a front end are different than those required for the optimizer and back end. Separating these makes it easier for a "front-end person" to enhance and maintain their part of the compiler. While this is a social issue, not a technical one, it matters a lot in practice, particularly for open source projects that want to reduce the barrier to contributing as much as possible.
+
+[[---------start---------]]
+
+
+
+
 
 ## 11.2. Existing Language Implementations
 

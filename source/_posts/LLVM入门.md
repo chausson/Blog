@@ -28,7 +28,7 @@ The most popular design for a traditional static compiler (like most C compilers
 
 ## 11.1. 经典编译器设计的概要
 
-传统静态编译器（大多数 C 编译器）比较流行的设计是三段设计，其主要的组成是前端、优化器和后端(如图11.1)(http://www.aosabook.org/en/llvm.html#fig.llvm.com))。前端负责的职责是解析源代码，检查错误，并编译和构建特定语言的抽象语法树(AST)来生成中间代码。为了优化抽象语法树 (AST) 可以任意的转换成一种新的呈现方式,并在代码上运行优化器和后端。
+传统静态编译器（大多数 C 编译器）比较流行的设计是三段式设计，其主要的组成是前端、优化器和后端(如图11.1)(http://www.aosabook.org/en/llvm.html#fig.llvm.com))。前端负责的职责是解析源代码，检查错误，并编译和构建特定语言的抽象语法树(AST)来生成中间代码。为了优化抽象语法树 (AST) 可以任意的转换成一种新的呈现方式,并在代码上运行优化器和后端。
 
 
 Figure 11.1: Three Major Components of a Three-Phase Compiler
